@@ -27,6 +27,20 @@
         border: none;
         cursor: pointer;
         padding: 0.5rem;
+        position: relative;
+      }
+
+      .but1 {
+        z-index: 1001;
+      }
+
+      .but2 {
+        z-index: 1001;
+      }
+
+      input[name="nav-control"]:checked + .but1,
+      input[name="nav-control"]:checked + .but2 {
+        z-index: 997;
       }
 
       .trigger-btn span {
@@ -64,7 +78,7 @@
         right: 0;
         background-color: #ffffff;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
+        z-index: 1001;
         margin-top: 1rem;
       }
 
@@ -177,7 +191,7 @@
             id="nav-trigger-1"
             class="nav-radio"
           />
-          <label for="nav-trigger-1" class="trigger-btn">
+          <label for="nav-trigger-1" class="trigger-btn but1">
             <span>Меню 1</span>
             <svg
               class="arrow-icon"
@@ -223,7 +237,7 @@
             id="nav-trigger-2"
             class="nav-radio"
           />
-          <label for="nav-trigger-2" class="trigger-btn">
+          <label for="nav-trigger-2" class="trigger-btn but2">
             <span>Меню 2</span>
             <svg
               class="arrow-icon"

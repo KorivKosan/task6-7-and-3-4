@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      .navigation {
+        background-color: #fff;
+        padding: 1rem 2rem;
+        position: relative;
+      }
+
+      .nav-items {
+        display: flex;
+        align-items: center;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        gap: 2rem;
+      }
+
+      .trigger-btn {
+        display: inline-flex;
+        align-items: center;
+        font-size: 1rem;
+        color: #333;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .trigger-btn span {
+        margin-right: 0.5rem;
+        font-weight: 500;
+      }
+
+      .trigger-btn .arrow-icon {
+        width: 1rem;
+        height: 1rem;
+        fill: currentColor;
+      }
+
+      .nav-radio,
+      #close-menu {
+        display: none;
+      }
+
+      .backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: transparent;
+        z-index: 999;
+      }
+
+      input[name="nav-control"]:checked ~ .backdrop {
+        display: block;
+      }
+
+      .dropdown {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        background-color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        margin-top: 1rem;
+      }
+
+      input[name="nav-control"]:checked ~ form .dropdown {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      input[name="nav-control"]:checked ~ form .dropdown label {
+        grid-column: 1;
+      }
+
+      .submenu-radio {
+        display: none;
+      }
+
+      .dropdown label {
+        display: block;
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.2s;
+      }
+
+      .dropdown label:hover {
+        background-color: #f5f5f5;
+      }
+
+      .content-area {
+        padding: 1rem;
+      }
+
+      .content-area h3 {
+        margin: 0;
+        display: none;
+      }
+
+      .submenu-radio:checked + label {
+        background-color: #f0f0f0;
+        font-weight: 500;
+      }
+
+      #submenu1-1:checked ~ .content-area .title-1,
+      #submenu2-1:checked ~ .content-area .title-1,
+      #submenu1-2:checked ~ .content-area .title-2,
+      #submenu2-2:checked ~ .content-area .title-2 {
+        display: block;
+      }
+
+      .submenu-radio:checked ~ .content-area {
+        grid-column: 2;
+      }
+
+      .arrow-icon {
+        transition: transform 0.2s;
+      }
+
+      input[name="nav-control"]:checked + .trigger-btn .arrow-icon {
+        transform: rotate(180deg);
+      }
+
+      @media (max-width: 768px) {
+        .nav-items {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .dropdown {
+          position: static;
+          box-shadow: none;
+        }
+
+        input[name="nav-control"]:checked ~ form .dropdown {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          position: relative;
+          z-index: 1001;
+        }
+
+        .content-area {
+          grid-column: 1;
+          margin-top: 1rem;
+          border-top: 1px solid #f0f0f0;
+          padding-top: 1rem;
+        }
+
+        .submenu-radio:checked ~ .content-area {
+          grid-column: 1;
+        }
+      }
+    </style>
+    <title>Menu CSS</title>
+  </head>
+  <body>
+    <nav class="navigation">
+      <input
+        type="radio"
+        name="nav-control"
+        id="close-menu"
+        class="nav-radio"
+      />
+
+      <ul class="nav-items">
+        <li class="nav-item">
+          <input
+            type="radio"
+            name="nav-control"
+            id="nav-trigger-1"
+            class="nav-radio"
+          />
+          <label for="nav-trigger-1" class="trigger-btn">
+            <span>Меню 1</span>
+            <svg
+              class="arrow-icon"
+              viewBox="0 0 32 32"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.254 12C5.13904 12 4.58067 13.3483 5.36906 14.1368L9.9588 18.7274C12.8067 21.5758 14.2306 23 16 23C17.7694 23 19.1934 21.5758 22.0412 18.7274L26.6309 14.1368C27.4193 13.3483 26.861 12 25.746 12C25.4141 12 25.0958 12.1319 24.861 12.3666L20.2713 16.9572C18.7974 18.4314 17.8662 19.3553 17.0979 19.9416C16.3874 20.4837 16.1174 20.4965 16 20.4965C15.8826 20.4965 15.6126 20.4837 14.9021 19.9416C14.1338 19.3553 13.2026 18.4314 11.7287 16.9572L7.13894 12.3666C6.90425 12.1319 6.58592 12 6.254 12Z"
+              ></path>
+            </svg>
+          </label>
+          <label class="backdrop" for="close-menu"></label>
+          <form>
+            <div class="dropdown">
+              <input
+                type="radio"
+                name="submenu-1"
+                id="submenu1-1"
+                class="submenu-radio"
+                checked
+              />
+              <label for="submenu1-1">Подменю 1</label>
+              <input
+                type="radio"
+                name="submenu-1"
+                id="submenu1-2"
+                class="submenu-radio"
+              />
+              <label for="submenu1-2">Подменю 2</label>
+              <div class="content-area">
+                <h3 class="title-1">Контент 1</h3>
+                <h3 class="title-2">Контент 2</h3>
+              </div>
+            </div>
+          </form>
+        </li>
+
+        <li class="nav-item">
+          <input
+            type="radio"
+            name="nav-control"
+            id="nav-trigger-2"
+            class="nav-radio"
+          />
+          <label for="nav-trigger-2" class="trigger-btn">
+            <span>Меню 2</span>
+            <svg
+              class="arrow-icon"
+              viewBox="0 0 32 32"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.254 12C5.13904 12 4.58067 13.3483 5.36906 14.1368L9.9588 18.7274C12.8067 21.5758 14.2306 23 16 23C17.7694 23 19.1934 21.5758 22.0412 18.7274L26.6309 14.1368C27.4193 13.3483 26.861 12 25.746 12C25.4141 12 25.0958 12.1319 24.861 12.3666L20.2713 16.9572C18.7974 18.4314 17.8662 19.3553 17.0979 19.9416C16.3874 20.4837 16.1174 20.4965 16 20.4965C15.8826 20.4965 15.6126 20.4837 14.9021 19.9416C14.1338 19.3553 13.2026 18.4314 11.7287 16.9572L7.13894 12.3666C6.90425 12.1319 6.58592 12 6.254 12Z"
+              ></path>
+            </svg>
+          </label>
+          <label class="backdrop" for="close-menu"></label>
+          <form>
+            <div class="dropdown">
+              <input
+                type="radio"
+                name="submenu-2"
+                id="submenu2-1"
+                class="submenu-radio"
+                checked
+              />
+              <label for="submenu2-1">Подменю 1</label>
+              <input
+                type="radio"
+                name="submenu-2"
+                id="submenu2-2"
+                class="submenu-radio"
+              />
+              <label for="submenu2-2">Подменю 2</label>
+              <div class="content-area">
+                <h3 class="title-1">Контент 1</h3>
+                <h3 class="title-2">Контент 2</h3>
+              </div>
+            </div>
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>
